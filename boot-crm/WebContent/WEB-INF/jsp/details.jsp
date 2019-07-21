@@ -8,6 +8,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
@@ -23,13 +24,26 @@
 
 <!-- MetisMenu CSS -->
 <link href="<%=basePath%>css/metisMenu.min.css" rel="stylesheet">
+
+<!-- DataTables CSS -->
 <link href="<%=basePath%>css/dataTables.bootstrap.css" rel="stylesheet">
+
 <!-- Custom CSS -->
 <link href="<%=basePath%>css/sb-admin-2.css" rel="stylesheet">
+
 <!-- Custom Fonts -->
-<link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
 <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet"
 	type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body>
@@ -56,9 +70,100 @@
 					<i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-messages">
-				</ul>
+					<li><a href="#">
+							<div>
+								<strong>令狐冲</strong> <span class="pull-right text-muted">
+									<em>昨天</em>
+								</span>
+							</div>
+							<div>今天晚上向大哥找我吃饭，讨论一下去梅庄的事...</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a class="text-center" href="#"> <strong>查看全部消息</strong>
+							<i class="fa fa-angle-right"></i>
+					</a></li>
+				</ul> <!-- /.dropdown-messages --></li>
+			<!-- /.dropdown -->
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#"> <i class="fa fa-tasks fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-tasks">
+					<li><a href="#">
+							<div>
+								<p>
+									<strong>任务 1</strong> <span class="pull-right text-muted">完成40%</span>
+								</p>
+								<div class="progress progress-striped active">
+									<div class="progress-bar progress-bar-success"
+										role="progressbar" aria-valuenow="40" aria-valuemin="0"
+										aria-valuemax="100" style="width: 40%">
+										<span class="sr-only">完成40%</span>
+									</div>
+								</div>
+							</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a href="#">
+							<div>
+								<p>
+									<strong>任务 2</strong> <span class="pull-right text-muted">完成20%</span>
+								</p>
+								<div class="progress progress-striped active">
+									<div class="progress-bar progress-bar-info" role="progressbar"
+										aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+										style="width: 20%">
+										<span class="sr-only">完成20%</span>
+									</div>
+								</div>
+							</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a class="text-center" href="#"> <strong>查看所有任务</strong>
+							<i class="fa fa-angle-right"></i>
+					</a></li>
+				</ul> <!-- /.dropdown-tasks --></li>
+			<!-- /.dropdown -->
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-alerts">
+					<li><a href="#">
+							<div>
+								<i class="fa fa-comment fa-fw"></i> 新回复 <span
+									class="pull-right text-muted small">4分钟之前</span>
+							</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a href="#">
+							<div>
+								<i class="fa fa-envelope fa-fw"></i> 新消息 <span
+									class="pull-right text-muted small">4分钟之前</span>
+							</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a href="#">
+							<div>
+								<i class="fa fa-tasks fa-fw"></i> 新任务 <span
+									class="pull-right text-muted small">4分钟之前</span>
+							</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a href="#">
+							<div>
+								<i class="fa fa-upload fa-fw"></i> 服务器重启 <span
+									class="pull-right text-muted small">4分钟之前</span>
+							</div>
+					</a></li>
+					<li class="divider"></li>
+					<li><a class="text-center" href="#"> <strong>查看所有提醒</strong>
+							<i class="fa fa-angle-right"></i>
+					</a></li>
+				</ul> <!-- /.dropdown-alerts --></li>
+			<!-- /.dropdown -->
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
 					<i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-user">
@@ -67,27 +172,20 @@
 					<li class="divider"></li>
 					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
 							退出登录</a></li>
-				</ul>
-						</ul>
-		
+				</ul> <!-- /.dropdown-user --></li>
+			<!-- /.dropdown -->
+		</ul>
+		<!-- /.navbar-top-links -->
+
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
-					<li class="sidebar-search">
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="查询内容...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-search" style="padding: 3px 0 3px 0;"></i>
-								</button>
-							</span>
-						</div> <!-- /input-group -->
-					</li>
-					<li><a href="myConcern.action"><i
+					
+					<li><a href="${pageContext.request.contextPath }/myConcern.action"><i
 							class="fa fa-dashboard fa-fw"></i>我的关注</a></li>
-					<li><a href="customer.action" class="active"><i
+					<li><a href="${pageContext.request.contextPath }/customer.action" class="active"><i
 							class="fa fa-edit fa-fw"></i> 客户管理</a></li>
-					<li><a href="salevisit.action"><i
+					<li><a href="${pageContext.request.contextPath }/backSystem.action"><i
 							class="fa fa-dashboard fa-fw"></i>后台设置</a></li>
 				</ul>
 			</div>
@@ -100,23 +198,14 @@
 				<div class="col-lg-12">
 					<h1 class="page-header">客户详情</h1>
 				</div>
-				
+				<!-- /.col-lg-12 -->
 			</div>
-			<!-- /.row -->
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-inline" action="${pageContext.request.contextPath }/customer/list.action" method="post">
-						
-						
-						<button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerNewDialog" onclick="newCustomer()">新建</button>
-					</form>
-				</div>
-			</div>
+			
+			
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">客户信息列表</div>
+						<div class="panel-heading">基础信息</div>
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -147,23 +236,20 @@
 										<td>${row.cust_address}</td>
 										<td>
 											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
-											<a href="#" class="btn btn-danger btn-xs" onclick="detailsCustomer(${row.cust_id})">详情</a>
 											<c:if test="${row.cust_statu==1}" >
 												<%-- <span><input class="btn btn-danger btn-xs" id="followupdate" type="button" value="" onclick="updateCustomer(${row.cust_id})"></input></span> --%>
-												<span><input class="btn btn-danger btn-xs" id="followupdate" type="button" value="关注" onclick="updateCustomerStatu(${row.cust_id})"></input></span>
+												<span><input class="btn btn-danger btn-xs" id="followupdate" type="button" value="关注" onclick="updateCustomerStatu(${row.cust_id})"/></span>
 											</c:if>
 											<c:if test="${row.cust_statu==0}" >
 												<%-- <span><input class="btn btn-danger btn-xs" id="followupdate" type="button" value="" onclick="updateCustomer(${row.cust_id})"></input></span> --%>
-												<span><input class="btn btn-danger btn-xs" id="followupdate" type="button" value="取消关注" onclick="updateCustomerStatuCancel(${row.cust_id})"></input></span>
-											</c:if>
+												<span><input class="btn btn-danger btn-xs" id="followupdate" type="button" value="取消关注" onclick="updateCustomerStatuCancel(${row.cust_id})"/></span>
+										</c:if>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						<div class="col-md-12 text-right">
-							<itcast:page url="${pageContext.request.contextPath }/customer/list.action" />
-						</div>
+						
 						<!-- /.panel-body -->
 					</div>
 					<!-- /.panel -->
@@ -174,7 +260,6 @@
 		<!-- /#page-wrapper -->
 
 	</div>
-	
 	<!-- 客户修改对话框 -->
 	<div class="modal fade" id="customerEditDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -241,15 +326,15 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_mobile" class="col-sm-2 control-label">进店日期</label>
+							<label for="edit_dataString" class="col-sm-2 control-label">进店日期</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_mobile" placeholder="进店日期" name="cust_mobile">
+								<input type="text" class="form-control" id="edit_dataString" placeholder="进店日期" name="cust_dataString">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_zipcode" class="col-sm-2 control-label">旺旺ID</label>
+							<label for="edit_wangwangID" class="col-sm-2 control-label">旺旺ID</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_zipcode" placeholder="旺旺ID" name="cust_zipcode">
+								<input type="text" class="form-control" id="edit_wangwangID" placeholder="旺旺ID" name="cust_wangwangID">
 							</div>
 						</div>
 						<div class="form-group">
@@ -332,16 +417,16 @@
 								<input type="text" class="form-control" id="edit_phone" placeholder="移动电话" name="cust_phone">
 							</div>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="edit_mobile" class="col-sm-2 control-label">进店日期</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="edit_mobile" placeholder="进店日期" name="cust_mobile">
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group">
-							<label for="edit_zipcode" class="col-sm-2 control-label">旺旺ID</label>
+							<label for="edit_wangwangID" class="col-sm-2 control-label">旺旺ID</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_zipcode" placeholder="旺旺ID" name="cust_zipcode">
+								<input type="text" class="form-control" id="edit_wangwangID" placeholder="旺旺ID" name="cust_wangwangID">
 							</div>
 						</div>
 						<div class="form-group">
@@ -354,7 +439,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存修改</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
 				</div>
 			</div>
 		</div>
@@ -389,10 +474,10 @@
 					$("#edit_customerFrom").val(data.cust_source)
 					$("#edit_custIndustry").val(data.cust_industry)
 					$("#edit_custLevel").val(data.cust_level)
-					$("#edit_linkMan").val(data.cust_linkman);
-					$("#edit_phone").val(data.cust_phone);
-					$("#edit_mobile").val(data.cust_mobile);
-					$("#edit_zipcode").val(data.cust_zipcode);
+					$("#edit_linkMan").val(data.cust_linkman);//联系人
+					$("#edit_phone").val(data.cust_phone);  //移动电话
+					$("#edit_dataString").val(data.cust_dataString);   //进店日期
+					$("#edit_wangwangID").val(data.cust_wangwangID);
 					$("#edit_address").val(data.cust_address);
 				}
 			});
@@ -426,10 +511,16 @@
 			//}
 		//}
 		function detailsCustomer(id) {
-			$.post("<%=basePath%>customer/details.action",{"id":id},function(data){
-		
-				window.location.reload();
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>customer/details.action",
+				data:{"id":id},
+				success:function(data) {
+					
+				}
 			});
+			
+			
 		}
 		
 		function updateCustomerStatu(id){

@@ -1,7 +1,7 @@
 package cn.itcast.core.web.controller;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.BaseDict;
@@ -57,9 +58,10 @@ public class CustomerController {
 	public String showLogin() {
 		return "redirect:/login.jsp";
 	}
-	@RequestMapping(value = "/customer/details")
-	public String details() {
-		return "redirect:/login.jsp";
+	@RequestMapping(value = "/backSystem")
+	public String backSystem() {
+		
+		return "redirect:/customer/backSystem.action";
 	}
 	// 客户列表
 	@RequestMapping(value = "/customer/list")
@@ -75,7 +77,9 @@ public class CustomerController {
 		//	Date date = sdf.format(cust.getCust_createtime().toString());
 		//System.out.println(cust.getCust_createtime().toString());
 		//	Date createtime = Date.valueOf(cust.getCust_createtime().toString());
-			cust.setCust_dataString(simpleDateFormat.format(cust.getCust_createtime()));
+			if(null!=cust.getCust_createtime()){
+				cust.setCust_dataString(simpleDateFormat.format(cust.getCust_createtime()));
+			}
 		}
 		
 		model.addAttribute("page", customers);
@@ -95,13 +99,69 @@ public class CustomerController {
 		model.addAttribute("custLevel", custLevel);
 		return "customer";
 	}
-	// 客户关注列表
+	
+	  // 客户后台设置列表
+		@RequestMapping(value = "/customer/backSystem")
+		public String backSystem(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="10")Integer rows, Model model) {
+
+			Page<SysUser> sysUsers = customerService.findUserList(page, rows);
+			
+			model.addAttribute("page", sysUsers);
+			return "backSystem";
+		}
+	// 客户详情列表
+		@RequestMapping(value = "/customer/details")
+		public String details(Long id,RedirectAttributes  res) {
+			
+			  res.addAttribute("id", id);
+			return "redirect:/customer/detailsHtml.action";
+		}
+	
+		// 客户详情列表
+		@RequestMapping(value = "/customer/detailsHtml")
+		public String detailsHtml(Long id,String custName, String custSource,String custIndustry, String custLevel, Model model) {
+			Page<Customer> customers = customerService.getCustomerList(id,custName, custSource, custIndustry,custLevel);
+			List<Customer> customer = customers.getRows();
+			for(Customer cust:customer){
+			//	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", java.util.Locale.US);
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			//	Date date = sdf.format(cust.getCust_createtime().toString());
+			//System.out.println(cust.getCust_createtime().toString());
+			//	Date createtime = Date.valueOf(cust.getCust_createtime().toString());
+				if(null!=cust.getCust_createtime()){
+					cust.setCust_dataString(simpleDateFormat.format(cust.getCust_createtime()));
+				}
+			}
+			
+			model.addAttribute("page", customers);
+			//客户来源
+			List<BaseDict> fromType = systemService.findBaseDictListByType(FROM_TYPE);
+			//客户所属行业
+			List<BaseDict> industryType = systemService.findBaseDictListByType(INDUSTRY_TYPE);
+			//客户级别
+			List<BaseDict> levelType = systemService.findBaseDictListByType(LEVEL_TYPE);
+			model.addAttribute("fromType", fromType);
+			model.addAttribute("industryType", industryType);
+			model.addAttribute("levelType", levelType);
+			//参数回显
+			model.addAttribute("custName", custName);
+			model.addAttribute("custSource", custSource);
+			model.addAttribute("custIndustry", custIndustry);
+			model.addAttribute("custLevel", custLevel);
+		//	return "customer";
+			//Customer customer = customerService.getCustomerList(id);
+		//	model.addAttribute("details", customer);
+			return "details";
+		}
+		
+		// 客户关注列表
 		@RequestMapping(value = "/customer/myConcernList")
 		public String myConcernList(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="10")Integer rows, 
 				String custName, String custSource,	String custIndustry, String custLevel, Model model) {
 
-			Page<Customer> customers = customerService.findCustomerList(page, rows, custName, custSource, custIndustry,
+			Page<Customer> customers = customerService.concernCustomerList(page, rows, custName, custSource, custIndustry,
 					custLevel);
+			
 			List<Customer> customer = customers.getRows();
 			for(Customer cust:customer){
 			//	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", java.util.Locale.US);
@@ -127,22 +187,40 @@ public class CustomerController {
 			model.addAttribute("custSource", custSource);
 			model.addAttribute("custIndustry", custIndustry);
 			model.addAttribute("custLevel", custLevel);
-			return "customer";
+			return "concernCustomer";
 		}
 	
 	@RequestMapping("/customer/edit")
 	@ResponseBody
 	public Customer getCustomerById(Long id) {
 		Customer customer = customerService.getCustomerById(id);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		customer.setCust_dataString(simpleDateFormat.format(customer.getCust_createtime()));
 		return customer;
 	}
 	
 	@RequestMapping("/customer/update")
 	@ResponseBody
 	public String customerUpdate(Customer customer) {
+		Date d =new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	//	if(null!= customer.getCust_createtime()){
+	//		customer.setCust_createtime(customer.getCust_createtime);
+	//	}
 		customerService.updateCustomer(customer);
 		return "OK";
 	}
+	
+	@RequestMapping("/customer/insertCustomer")
+	@ResponseBody
+	public String customerinsert(Customer customer) {
+		Date d =new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		customer.setCust_createtime(d);
+		customerService.insertCustomer(customer);
+		return "OK";
+	}
+	
 	@RequestMapping("/customer/delete")
 	@ResponseBody
 	public String customerDelete(Long id) {

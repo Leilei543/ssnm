@@ -4,22 +4,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Customer implements Serializable {
-	private Long cust_id;
-	private String cust_name;
-	private Long cust_user_id;
-	private Long cust_create_id;
-	private String cust_source;
-	private String cust_industry;
-	private String cust_level;
-	private String cust_linkman;
-	private String cust_phone;
+	private Long cust_id;   //客户编号(主键)
+	private String cust_name;  //客户名称(公司名称)
+	private Long cust_user_id;  //负责人id
+	private Long cust_create_id;  //创建人id
+	private String cust_source;  //客户信息地区
+	private String cust_industry; //客户所属状态
+	private String cust_level;    //客户级别
+	private String cust_linkman;  //联系人
+	private String cust_phone;		//固定电话
 	private String cust_mobile;
 	private String cust_zipcode;
 	private String cust_address;
 	private Date cust_createtime;
 	private String cust_dataString;
 	
-	private String cust_wangwangID;
+	private String cust_wangwangID;  //
 	private Integer start;
 	private Integer rows;
 	private String cust_statu;

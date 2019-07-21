@@ -26,7 +26,7 @@
 				<div class="container">
 					<div class="navbar-header">
 						<!-- <a class="navbar-brand" href="#"><img src="images/logo.png"></a> -->
-						<span class="logintitle">AimiGi员工登录</span>
+						<span class="logintitle">团结一心   服务至上  —— AimiGe客户管理系统</span>
 					</div>
 				</div>
 			</nav>
@@ -80,7 +80,7 @@
 
 		<footer class="clearfix">
 			<div class="container">
-			<p class="text-center">地址：湖北省武汉市东西湖区100297392号 邮编：4300000 电话：15629068065 传真：010-82935100 </p>
+			
 			<!-- <p  class="text-center">京ICP备08001421号京公网安备110108007702</p> -->
 </div>
 		</footer>

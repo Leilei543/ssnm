@@ -66,6 +66,99 @@ public class CustomerServiceImpl implements CustomerService {
 		return result;
 
 	}
+	//查询客户基本信息
+	public Page<Customer> getCustomerList(Long id, String custName,  String custSource,String custIndustry,String custLevel) {
+		Customer customer = new Customer();
+		//判断客户名称(公司名称)
+		if(StringUtils.isNotBlank(custName)){
+			customer.setCust_name(custName);
+		}
+		//判断客户信息来源
+		if(StringUtils.isNotBlank(custSource)){
+			customer.setCust_source(custSource);
+		}
+		//判断客户所属行业
+		if(StringUtils.isNotBlank(custIndustry)){
+			customer.setCust_industry(custIndustry);
+		}
+		//判断客户级别
+		if(StringUtils.isNotBlank(custLevel)){
+			customer.setCust_level(custLevel);
+		}
+		
+			customer.setCust_id(id);
+		
+		//查询客户列表
+		List<Customer> customers = customerDao.selectCustomerInform(customer);
+		//查询客户列表总记录数
+	//	Integer count = customerDao.selectCustomerListCount(customer);
+		//创建Page返回对象
+		Page<Customer> result = new Page<>();
+		
+		result.setRows(customers);
+	
+		
+		return result;
+
+	}
+	
+	public Page<Customer> concernCustomerList(Integer page, Integer rows, 
+			String custName,  String custSource,String custIndustry,String custLevel) {
+		Customer customer = new Customer();
+		//判断客户名称(公司名称)
+		if(StringUtils.isNotBlank(custName)){
+			customer.setCust_name(custName);
+		}
+		//判断客户信息来源
+		if(StringUtils.isNotBlank(custSource)){
+			customer.setCust_source(custSource);
+		}
+		//判断客户所属行业
+		if(StringUtils.isNotBlank(custIndustry)){
+			customer.setCust_industry(custIndustry);
+		}
+		//判断客户级别
+		if(StringUtils.isNotBlank(custLevel)){
+			customer.setCust_level(custLevel);
+		}
+		//当前页
+		customer.setStart((page-1) * rows) ;
+		//每页数
+		customer.setRows(rows);
+		//查询客户列表
+		List<Customer> customers = customerDao.selectConcernCustomerList(customer);
+		//查询客户列表总记录数
+		Integer count = customerDao.selectConcernCustomerListCount(customer);
+		//创建Page返回对象
+		Page<Customer> result = new Page<>();
+		result.setPage(page);
+		result.setRows(customers);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
+
+	}
+	//查询用户列表
+	public Page<SysUser> findUserList(Integer page, Integer rows) {
+		Customer customer = new Customer();
+		
+		//当前页
+		customer.setStart((page-1) * rows) ;
+		//每页数
+		customer.setRows(rows);
+		//查询客户列表
+		List<SysUser> customers = customerDao.selectUserList(customer);
+		//查询客户列表总记录数
+		Integer count = customerDao.selectUserListCount(customer);
+		//创建Page返回对象
+		Page<SysUser> result = new Page<>();
+		result.setPage(page);
+		result.setRows(customers);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
+
+	}
 
 
 	@Override
@@ -80,7 +173,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void updateCustomer(Customer customer) {
 		customerDao.updateCustomer(customer);
-		
 	}
 
 
@@ -102,14 +194,28 @@ public class CustomerServiceImpl implements CustomerService {
 		SysUser sysUser = new SysUser();
 		//判断客户名称(公司名称)
 		if(StringUtils.isNotBlank(telephone)){
-			sysUser.setTelephone(telephone);
+			sysUser.setUser_phone(telephone);
 		}
 		//判断客户信息来源
 		if(StringUtils.isNotBlank(password)){
-			sysUser.setPassword(password);
+			sysUser.setUser_password(password);
 		}
 		//customerDao.selectUserLogin(sysUser);
 		return customerDao.selectUserLogin(sysUser);
 	}
+
+
+	@Override
+	public void insertCustomer(Customer customer) {
+		customerDao.insertCustomer(customer);
+		
+	}
+
+
+	//@Override
+	/*public Customer getCustomerList(Long id) {
+		// TODO Auto-generated method stub
+		return customerDao.getCustomerList(id);
+	}*/
 
 }

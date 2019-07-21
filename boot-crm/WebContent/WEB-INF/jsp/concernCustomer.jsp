@@ -180,7 +180,6 @@
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
-					
 					<li><a href="${pageContext.request.contextPath }/myConcern.action"><i
 							class="fa fa-dashboard fa-fw"></i>我的关注</a></li>
 					<li><a href="${pageContext.request.contextPath }/customer.action" class="active"><i
@@ -196,55 +195,15 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">客户管理</h1>
+					<h1 class="page-header">我的关注</h1>
 				</div>
-				<!-- /.col-lg-12 -->
+				
 			</div>
-			<!-- /.row -->
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<%-- <form class="form-inline"  method="post" action="${pageContext.request.contextPath }/customer/list.action" > --%>
-					<form class="form-inline"  method="post" >
-						<div class="form-group">
-							<label for="customerName">客户名称</label> 
-							<input type="text" class="form-control" id="customerName" value="${custName }" name="custName">
-						</div>
-						<div class="form-group">
-							<label for="customerFrom">客户地区</label> 
-							<select	class="form-control" id="customerFrom" placeholder="客户地区" name="custSource">
-								<option value="">--请选择--</option>
-								<c:forEach items="${fromType}" var="item">
-									<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="custIndustry">所属状态</label> 
-							<select	class="form-control" id="custIndustry"  name="custIndustry">
-								<option value="">--请选择--</option>
-								<c:forEach items="${industryType}" var="item">
-									<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="custLevel">客户级别</label>
-							<select	class="form-control" id="custLevel" name="custLevel">
-								<option value="">--请选择--</option>
-								<c:forEach items="${levelType}" var="item">
-									<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-								</c:forEach>
-							</select>
-						</div>&nbsp;&nbsp;&nbsp;
-						<button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerNewDialog" onclick="newCustomer()">新建</button>
-					</form>
-				</div>
-			</div>
+			
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">客户信息列表</div>
+						<div class="panel-heading">关注客户信息列表</div>
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -290,7 +249,7 @@
 							</tbody>
 						</table>
 						<div class="col-md-12 text-right">
-							<itcast:page url="${pageContext.request.contextPath }/customer/list.action" />
+							<itcast:page url="${pageContext.request.contextPath }/customer/myConcern.action" />
 						</div>
 						<!-- /.panel-body -->
 					</div>
@@ -394,7 +353,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 客户新建对话框 -->
+	<%-- <!-- 客户新建对话框 -->
 	<div class="modal fade" id="customerNewDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -485,7 +444,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
@@ -533,7 +492,7 @@
 		}
 		function updateCustomer() {
 			$.post("<%=basePath%>customer/update.action",$("#edit_customer_form").serialize(),function(data){
-				alert("客户信息更新成功！");
+			//	alert("客户信息更新成功！");
 				window.location.reload();
 			});
 		}

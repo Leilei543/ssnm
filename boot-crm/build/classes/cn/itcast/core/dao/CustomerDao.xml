@@ -16,6 +16,7 @@
 	      <if test="cust_level != null" >
 	        and cust_level = #{cust_level}
 	      </if>
+	    
     	</where>
 	</sql>
 	<select id="selectCustomerList" parameterType="customer" resultType="customer">
@@ -65,6 +66,7 @@
 				dict_type_code = '006'
 		) d ON a.cust_level = d.dict_id
 		<include refid="selectCustomerListWhere"/>
+		order by cust_createtime desc
 		<if test="start !=null and rows != null">
 			limit #{start},#{rows}
 		</if>
@@ -73,9 +75,90 @@
 		select count(*)
 		from customer
 		<include refid="selectCustomerListWhere"/>
-	</select>	
+	</select>
+	
+	<select id="selectConcernCustomerList" parameterType="customer" resultType="customer">
+		SELECT
+			cust_id,
+			cust_name,
+			cust_user_id,
+			cust_create_id,
+			cust_statu,
+			cust_wangwangID,
+			b.dict_item_name cust_source,
+			c.dict_item_name cust_industry,
+			d.dict_item_name cust_level,
+			cust_linkman,
+			cust_phone,
+			cust_mobile,
+			cust_createtime,
+			cust_address
+		
+		FROM
+			customer a
+		LEFT JOIN (
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '002'
+		) b ON a.cust_source = b.dict_id
+		LEFT JOIN (
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '001'
+		) c ON a.cust_industry = c.dict_id
+		LEFT JOIN (
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '006'
+		) d ON a.cust_level = d.dict_id
+		where cust_statu = 0
+		order by cust_createtime desc
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+	<select id="selectConcernCustomerListCount" parameterType="customer" resultType="int">
+		select count(*)
+		from customer
+		where cust_statu=0
+	</select>
+	
+	<select id="selectUserList" parameterType="customer" resultType="sysuser">
+		SELECT
+			user_id,
+			user_code,
+			user_name,
+			user_password,
+			user_state,
+			user_phone
+		FROM
+			sys_user
+		where user_state = '1' order by user_createtime desc
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+	<select id="selectUserListCount" parameterType="customer" resultType="int">
+		select count(*) from  sys_user where user_state='1'
+		
+	</select>				
 	
 	<select id="getCustomerById" parameterType="long" resultType="customer">
+		select * from customer where cust_id = #{id}
+	</select>
+	<select id="getCustomerList" parameterType="long" resultType="customer">
 		select * from customer where cust_id = #{id}
 	</select>
 	<update id="updateCustomer" parameterType="customer">
@@ -108,8 +191,8 @@
 			<if test="cust_mobile!=null">
 				cust_mobile=#{cust_mobile},
 			</if>
-			<if test="cust_zipcode!=null">
-				cust_zipcode=#{cust_zipcode},
+			<if test="cust_wangwangID!=null">
+				cust_wangwangID=#{cust_wangwangID},
 			</if>
 			<if test="cust_address!=null">
 				cust_address=#{cust_address},
@@ -129,18 +212,12 @@
 	<update id="updateCustomerStatuCancel" parameterType="long">
 		UPDATE customer  SET cust_statu='1' WHERE cust_id=#{id};
 	</update>
+	<insert id="insertCustomer" parameterType="customer">
+		insert into customer(cust_name,cust_source,cust_industry,cust_level,cust_linkman,cust_phone,cust_wangwangID,cust_address,cust_createtime)
+		values(#{cust_name},#{cust_source},#{cust_industry},#{cust_level},#{cust_linkman},#{cust_phone},#{cust_wangwangID},#{cust_address},#{cust_createtime})
 	
+	</insert>
 	<select id="selectUserLogin" parameterType="sysUser" resultType="sysUser">
-		select *
-		from sys_user
-		<where>
-	      <if test="telephone!= null" >
-	        user_phone=#{telephone}
-	      </if>
-	      <if test="password != null" >
-	        and user_password = #{password}
-	      </if>
-	        and user_state ='1'
-    	</where>
+		select * from sys_user where user_phone=#{user_phone} and user_password = #{user_password}  and user_state ='1'
 	</select>
 </mapper>
