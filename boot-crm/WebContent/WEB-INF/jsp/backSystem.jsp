@@ -204,8 +204,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">用户信息列表</div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerNewDialog" onclick="newCustomer()">新建</button>
 						
+						<div class="panel-heading">内部账号列表<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -240,6 +240,149 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">设置地区列表<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>地区</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.user_id}</td>
+										<td>${row.user_password}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
+											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<%-- <div class="col-md-12 text-right">
+							<itcast:page url="${pageContext.request.contextPath }/customer/backSystem.action" />
+						</div> --%>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">设置状态列表<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.user_id}</td>
+										<td>${row.user_password}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
+											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<%-- <div class="col-md-12 text-right">
+							<itcast:page url="${pageContext.request.contextPath }/customer/backSystem.action" />
+						</div> --%>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">设置级别列表<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>级别</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.user_id}</td>
+										<td>${row.user_password}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
+											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<%-- <div class="col-md-12 text-right">
+							<itcast:page url="${pageContext.request.contextPath }/customer/backSystem.action" />
+						</div> --%>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">设置操作记录列表<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>级别</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.user_id}</td>
+										<td>${row.user_password}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
+											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<%-- <div class="col-md-12 text-right">
+							<itcast:page url="${pageContext.request.contextPath }/customer/backSystem.action" />
+						</div> --%>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			
 		</div>
 		<!-- /#page-wrapper -->
 

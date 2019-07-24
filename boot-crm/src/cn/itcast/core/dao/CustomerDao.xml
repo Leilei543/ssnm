@@ -71,6 +71,54 @@
 			limit #{start},#{rows}
 		</if>
 	</select>
+	<select id="selectCustomerInform" parameterType="customer" resultType="customer">
+		SELECT
+			cust_id,
+			cust_name,
+			cust_user_id,
+			cust_create_id,
+			cust_statu,
+			cust_wangwangID,
+			b.dict_item_name cust_source,
+			c.dict_item_name cust_industry,
+			d.dict_item_name cust_level,
+			cust_linkman,
+			cust_phone,
+			cust_mobile,
+			cust_createtime,
+			cust_address
+		
+		FROM
+			customer a
+		LEFT JOIN (
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '002'
+		) b ON a.cust_source = b.dict_id
+		LEFT JOIN (
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '001'
+		) c ON a.cust_industry = c.dict_id
+		LEFT JOIN (
+			SELECT
+				dict_id,
+				dict_item_name
+			FROM
+				base_dict
+			WHERE
+				dict_type_code = '006'
+		) d ON a.cust_level = d.dict_id
+		where cust_id = #{cust_id}
+	</select>
 	<select id="selectCustomerListCount" parameterType="customer" resultType="int">
 		select count(*)
 		from customer
