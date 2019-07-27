@@ -137,7 +137,7 @@ public class CustomerController {
 
 			Page<MeterData> meterDetail = customerService.findMeterList(page, rows,id);
 			
-			model.addAttribute("page", meterDetail);
+			model.addAttribute("pageD", meterDetail);
 			return "details";
 		}
 		

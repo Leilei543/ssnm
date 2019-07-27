@@ -184,7 +184,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${page.rows}" var="row">
+								<c:forEach items="${pageD.rows}" var="row">
 									<tr>
 										<td>${row.cust_id}</td>
 										<td>${row.data_menuname}</td>
