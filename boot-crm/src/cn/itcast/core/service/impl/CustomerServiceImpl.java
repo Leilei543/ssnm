@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 import cn.itcast.core.dao.BaseDictDao;
 import cn.itcast.core.dao.CustomerDao;
@@ -209,6 +210,32 @@ public class CustomerServiceImpl implements CustomerService {
 	public void insertCustomer(Customer customer) {
 		customerDao.insertCustomer(customer);
 		
+	}
+	@Override
+	public Page<MeterData> findMeterList( Integer page, Integer rows,Long id) {
+		MeterData meterData = new MeterData();
+		
+		//当前页
+		meterData.setCust_id(id);
+		
+		meterData.setStart((page-1) * rows) ;
+		//每页数
+		meterData.setRows(rows);
+		//查询客户列表
+		List<MeterData> meterDatas = customerDao.selectMeterDataList(meterData);
+		//查询客户列表总记录数
+		Integer count = customerDao.selectMeterDataListCount(meterData);
+		//创建Page返回对象
+		Page<MeterData> result = new Page<>();
+		result.setPage(page);
+		result.setRows(meterDatas);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
+
+		
+		
+	
 	}
 
 

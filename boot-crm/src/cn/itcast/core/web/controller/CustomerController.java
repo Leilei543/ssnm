@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.BaseDict;
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 import cn.itcast.core.service.CustomerService;
 import cn.itcast.core.service.SystemService;
@@ -62,6 +63,12 @@ public class CustomerController {
 	public String backSystem() {
 		
 		return "redirect:/customer/backSystem.action";
+	}
+	@RequestMapping(value = "/loginOut")
+	public String loginOut(HttpServletRequest request) {
+		request.getSession().invalidate();
+		
+		return "redirect:login.jsp";
 	}
 	// 客户列表
 	@RequestMapping(value = "/customer/list")
@@ -113,10 +120,28 @@ public class CustomerController {
 		@RequestMapping(value = "/customer/details")
 		public String details(Long id,RedirectAttributes  res) {
 			
-			  res.addAttribute("id", id);
+			res.addAttribute("id", id);
 			return "redirect:/customer/detailsHtml.action";
 		}
 	
+		// 客户详情列表
+		@RequestMapping(value = "/customer/meterData")
+		public String meterData(Long id,RedirectAttributes  res) {
+			
+			res.addAttribute("id", id);
+			return "redirect:/customer/meterDataDetails.action";
+		}
+		
+		@RequestMapping(value = "/customer/meterDataDetails")
+		public String meterDataDetails(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="5")Integer rows,Long id, Model model) {
+
+			Page<MeterData> meterDetail = customerService.findMeterList(page, rows,id);
+			
+			model.addAttribute("page", meterDetail);
+			return "details";
+		}
+		
+		
 		// 客户详情列表
 		@RequestMapping(value = "/customer/detailsHtml")
 		public String detailsHtml(Long id,String custName, String custSource,String custIndustry, String custLevel, Model model) {
@@ -132,8 +157,9 @@ public class CustomerController {
 					cust.setCust_dataString(simpleDateFormat.format(cust.getCust_createtime()));
 				}
 			}
-			
 			model.addAttribute("page", customers);
+			/*Page<MeterData> meterDetail = customerService.findMeterList(page, rows,id);
+			model.addAttribute("pageD", meterDetail);*/
 			//客户来源
 			List<BaseDict> fromType = systemService.findBaseDictListByType(FROM_TYPE);
 			//客户所属行业
@@ -250,10 +276,7 @@ public class CustomerController {
 			return "redirect:login.action";
 		} else {
 			// 登录成功
-			/*ServletActionContext.getRequest().getSession()
-					.setAttribute("SysUser", SysUser);*/
-			HttpSession session = request.getSession();  
-			session.getAttribute("SysUser");
+			request.getSession().setAttribute("SysUser", SysUser);
 			return "redirect:/customer/list.action";
 		}
 	}

@@ -3,6 +3,7 @@ package cn.itcast.core.dao;
 import java.util.List;
 
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 
 public interface CustomerDao {
@@ -14,6 +15,9 @@ public interface CustomerDao {
 	Integer selectConcernCustomerListCount(Customer customer);
 	
 	List<Customer> selectCustomerInform(Customer customer);
+	
+	List<MeterData> selectMeterDataList(MeterData meterData);
+	Integer selectMeterDataListCount(MeterData meterData);
 	
 	List<SysUser> selectUserList(Customer customer);
 	Integer selectUserListCount(Customer customer);

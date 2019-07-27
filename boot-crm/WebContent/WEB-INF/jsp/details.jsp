@@ -68,107 +68,15 @@
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#"> <i class="fa fa-envelope fa-fw"></i>
 					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-messages">
-					<li><a href="#">
-							<div>
-								<strong>令狐冲</strong> <span class="pull-right text-muted">
-									<em>昨天</em>
-								</span>
-							</div>
-							<div>今天晚上向大哥找我吃饭，讨论一下去梅庄的事...</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a class="text-center" href="#"> <strong>查看全部消息</strong>
-							<i class="fa fa-angle-right"></i>
-					</a></li>
-				</ul> <!-- /.dropdown-messages --></li>
-			<!-- /.dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-tasks fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-tasks">
-					<li><a href="#">
-							<div>
-								<p>
-									<strong>任务 1</strong> <span class="pull-right text-muted">完成40%</span>
-								</p>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-success"
-										role="progressbar" aria-valuenow="40" aria-valuemin="0"
-										aria-valuemax="100" style="width: 40%">
-										<span class="sr-only">完成40%</span>
-									</div>
-								</div>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<p>
-									<strong>任务 2</strong> <span class="pull-right text-muted">完成20%</span>
-								</p>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-info" role="progressbar"
-										aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
-										style="width: 20%">
-										<span class="sr-only">完成20%</span>
-									</div>
-								</div>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a class="text-center" href="#"> <strong>查看所有任务</strong>
-							<i class="fa fa-angle-right"></i>
-					</a></li>
-				</ul> <!-- /.dropdown-tasks --></li>
-			<!-- /.dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-alerts">
-					<li><a href="#">
-							<div>
-								<i class="fa fa-comment fa-fw"></i> 新回复 <span
-									class="pull-right text-muted small">4分钟之前</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-envelope fa-fw"></i> 新消息 <span
-									class="pull-right text-muted small">4分钟之前</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-tasks fa-fw"></i> 新任务 <span
-									class="pull-right text-muted small">4分钟之前</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-upload fa-fw"></i> 服务器重启 <span
-									class="pull-right text-muted small">4分钟之前</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a class="text-center" href="#"> <strong>查看所有提醒</strong>
-							<i class="fa fa-angle-right"></i>
-					</a></li>
-				</ul> <!-- /.dropdown-alerts --></li>
-			<!-- /.dropdown -->
+					</a>
+			</li>
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
 					<i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-user">
 					<li><a href="#"><i class="fa fa-user fa-fw"></i> 用户设置</a></li>
-					<li><a href="#"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
+					<li><a href="#"><i class="fa fa-gear fa-fw"></i>修改密码</a></li>
 					<li class="divider"></li>
 					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
 							退出登录</a></li>
@@ -200,12 +108,10 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			
-			
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">基础信息</div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px">基础信息</div>
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -256,6 +162,211 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
+			
+			<!-- 测量数据 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >测量数据<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newceliangCustomer()">新建</button></div>
+						<!-- /.panel-heading -->
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>项目名称</th>
+									<th>高</th>
+									<th>宽</th>
+									<th>厚度</th>
+									<th>实际面积</th>
+									<th>备注</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.cust_id}</td>
+										<td>${row.data_menuname}</td>
+										<td>${row.data_width}</td>
+										<td>${row.data_higth}</td>
+										<td>${row.data_land}</td>
+										<td>${row.data_area}</td>
+										<td>${row.data_remark}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.data_id})">修改</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<div class="col-md-12 text-right">
+							<!-- 测量数据查询 -->
+							<itcast:page url="${pageContext.request.contextPath }/customer/meterData.action" />
+						</div>
+					</div>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			
+			
+			<!-- 订单报价 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >订单报价<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newOrderCustomer()">新建</button></div>
+						<!-- /.panel-heading -->
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>项目名称</th>
+									<th>面积</th>
+									<th>门扇</th>
+									<th>玻璃</th>
+									<th>开关</th>
+									<th>其他</th>
+									<th>金额</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.cust_id}</td>
+										<td>${row.cust_dataString}</td>
+										<td>${row.cust_wangwangID}</td>
+										<td>${row.cust_name}</td>
+										<td>${row.cust_phone}</td>
+										<td>${row.cust_source}</td>
+										<td>${row.cust_source}</td>
+										<td>${row.cust_address}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						
+						<!-- /.panel-body -->
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<!-- 货款结算 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						
+					 	<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >货款结算<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<!-- /.panel-heading -->
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>总金额</th>
+									<th>线上支付</th>
+									<th>线下支付</th>
+									<th>未结算</th>
+									<th>金额</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.cust_id}</td>
+										<td>${row.cust_dataString}</td>
+										<td>${row.cust_wangwangID}</td>
+										<td>${row.cust_name}</td>
+										<td>${row.cust_phone}</td>
+										<td>${row.cust_address}</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			<!-- 公共留言 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+				
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >公共留言<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						
+						<!-- /.panel-heading -->
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>时间</th>
+									<th>用户</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+										<td>${row.cust_id}</td>
+										<td>${row.cust_dataString}</td>
+										<td>${row.cust_wangwangID}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			
+		 <!-- 操作记录 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">操作记录</div>
+						<!-- /.panel-heading -->
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>时间</th>
+									<th>用户</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${page.rows}" var="row">
+									<tr>
+					 					<td>${row.cust_id}</td>
+										<td>${row.cust_dataString}</td>
+										<td>${row.cust_wangwangID}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			
+			
 		</div>
 		<!-- /#page-wrapper -->
 
@@ -489,6 +600,14 @@
 				window.location.reload();
 			});
 		}
+		function newceliangCustomer() {
+			$.post("<%=basePath%>customer/newCustomer.action",$("#new_customer_form").serialize(),function(data){
+				
+				window.location.reload();
+			});
+		}
+		
+		
 		function updateCustomer() {
 			$.post("<%=basePath%>customer/update.action",$("#edit_customer_form").serialize(),function(data){
 				alert("客户信息更新成功！");

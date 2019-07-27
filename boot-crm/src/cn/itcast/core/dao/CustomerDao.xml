@@ -16,7 +16,6 @@
 	      <if test="cust_level != null" >
 	        and cust_level = #{cust_level}
 	      </if>
-	    
     	</where>
 	</sql>
 	<select id="selectCustomerList" parameterType="customer" resultType="customer">
@@ -268,4 +267,17 @@
 	<select id="selectUserLogin" parameterType="sysUser" resultType="sysUser">
 		select * from sys_user where user_phone=#{user_phone} and user_password = #{user_password}  and user_state ='1'
 	</select>
+	<select id="selectMeterDataList" parameterType="meterData" resultType="meterData">
+		select data_id,cust_id,data_menuname,data_width,data_higth,data_land,data_area,data_statu,data_remark
+		from meter_data where cust_id=#{cust_id} and data_statu ='1' order by data_createtime desc
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+	<select id="selectMeterDataListCount" parameterType="meterData" resultType="int">
+		select count(*) from  meter_data where data_statu='1'
+	</select>	
+	
+	
+	
 </mapper>

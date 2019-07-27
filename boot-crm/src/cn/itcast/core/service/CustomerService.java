@@ -2,6 +2,7 @@ package cn.itcast.core.service;
 
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 
 
@@ -14,6 +15,8 @@ public interface CustomerService {
 	
 	// 查询基本信息
 	public Page<Customer> getCustomerList(Long id, String custName,  String custSource,String custIndustry,String custLevel);
+	//查询测量数据
+	public Page<MeterData> findMeterList( Integer page, Integer rows,Long id);
 	
 	// 关注客户列表
 	public Page<Customer> concernCustomerList(Integer page, Integer rows, 
