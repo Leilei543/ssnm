@@ -278,6 +278,9 @@
 		select count(*) from  meter_data where data_statu='1'
 	</select>	
 	
+	<update id="updateUserpassword" parameterType="sysUser">
+		UPDATE sys_user  SET user_password=#{user_password} WHERE user_id=#{user_id};
+	</update>
 	
 	
 </mapper>

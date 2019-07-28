@@ -131,7 +131,7 @@
 							<tbody>
 								<c:forEach items="${page.rows}" var="row">
 									<tr>
-										<td>${row.cust_id}</td>
+										<td id="custID" value="${row.cust_id}">${row.cust_id}</td>
 										<td>${row.cust_dataString}</td>
 										<td>${row.cust_wangwangID}</td>
 										<td>${row.cust_name}</td>
@@ -168,7 +168,7 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >测量数据<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newceliangCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >测量数据<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#meterNewDialog" onclick="newceliangCustomer()">新建</button></div>
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -194,16 +194,16 @@
 										<td>${row.data_area}</td>
 										<td>${row.data_remark}</td>
 										<td>
-											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.data_id})">修改</a>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editmeterdataEditDialog" onclick="editmeterdataCustomer(${row.data_id})">修改</a>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						<div class="col-md-12 text-right">
+						<%-- <div class="col-md-12 text-right">
 							<!-- 测量数据查询 -->
-							<itcast:page url="${pageContext.request.contextPath }/customer/meterData.action" />
-						</div>
+							<itcast:page url="${pageContext.request.contextPath }/customer/meterData.action?id=${row.cust_id}" />
+						</div> --%>
 					</div>
 				</div>
 				<!-- /.col-lg-12 -->
@@ -215,7 +215,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >订单报价<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newOrderCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >订单报价<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#orderNewDialog" onclick="newOrderCustomer()">新建</button></div>
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -243,13 +243,12 @@
 										<td>${row.cust_source}</td>
 										<td>${row.cust_address}</td>
 										<td>
-											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#orderEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						
 						<!-- /.panel-body -->
 					</div>
 				</div>
@@ -262,7 +261,7 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						
-					 	<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >货款结算<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+					 	<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >货款结算<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#accountNewDialog" onclick="newOrderCustomer()">新建</button></div>
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -286,7 +285,7 @@
 										<td>${row.cust_phone}</td>
 										<td>${row.cust_address}</td>
 										<td>
-											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
+											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#accountEditDialog" onclick="editCustomer(${row.cust_id})">修改</a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -304,7 +303,7 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 				
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >公共留言<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >公共留言<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#publicMessageNewDialog" onclick="newCustomer()">留言</button></div>
 						
 						<!-- /.panel-heading -->
 						<table class="table table-bordered table-striped">
@@ -312,7 +311,7 @@
 								<tr>
 									<th>时间</th>
 									<th>用户</th>
-									<th>操作</th>
+									<th>留言</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -463,8 +462,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- 客户新建对话框 -->
-	<div class="modal fade" id="customerNewDialog" tabindex="-1" role="dialog"
+	<!-- 测量数据新建对话框 -->
+	<div class="modal fade" id="meterNewDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -472,78 +471,45 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">新建客户信息</h4>
+					<h4 class="modal-title" id="myModalLabel">新建测量数据信息</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" id="new_customer_form">
 						<input type="hidden" id="edit_cust_id" name="cust_id"/>
 						<div class="form-group">
-							<label for="edit_customerName" class="col-sm-2 control-label">客户名称</label>
+							<label for="edit_customerName" class="col-sm-2 control-label">项目名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_customerName" placeholder="客户名称" name="cust_name">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="项目名称" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">客户地区</label> 
+							<label for="edit_customerName" class="col-sm-2 control-label">高度</label> 
 							<div class="col-sm-10">
-								<select	class="form-control" id="edit_customerFrom" placeholder="客户地区" name="cust_source">
-									<option value="">--请选择--</option>
-									<c:forEach items="${fromType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
+								<input type="text" class="form-control" id="edit_customerName" placeholder="高度" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">所属状态</label>
+							<label for="edit_customerName" class="col-sm-2 control-label">厚度</label>
 							<div class="col-sm-10"> 
-								<select	class="form-control" id="edit_custIndustry"  name="cust_industry">
-									<option value="">--请选择--</option>
-									<c:forEach items="${industryType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
+								<input type="text" class="form-control" id="edit_customerName" placeholder="厚度" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">客户级别</label>
-							<div class="col-sm-10">
-								<select	class="form-control" id="edit_custLevel" name="cust_level">
-									<option value="">--请选择--</option>
-									<c:forEach items="${levelType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
+							<label for="edit_customerName" class="col-sm-2 control-label">宽度</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="宽度" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_linkMan" class="col-sm-2 control-label">联系人</label>
+							<label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">实际面积</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_linkMan" placeholder="联系人" name="cust_linkman">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="实际面积" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_phone" class="col-sm-2 control-label">移动电话</label>
+							<label for="edit_linkMan" class="col-sm-2 control-label">备注</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_phone" placeholder="移动电话" name="cust_phone">
-							</div>
-						</div>
-						<!-- <div class="form-group">
-							<label for="edit_mobile" class="col-sm-2 control-label">进店日期</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_mobile" placeholder="进店日期" name="cust_mobile">
-							</div>
-						</div> -->
-						<div class="form-group">
-							<label for="edit_wangwangID" class="col-sm-2 control-label">旺旺ID</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_wangwangID" placeholder="旺旺ID" name="cust_wangwangID">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_address" class="col-sm-2 control-label">联系地址</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_address" placeholder="联系地址" name="cust_address">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="备注" name="cust_linkman">
 							</div>
 						</div>
 					</form>
@@ -555,6 +521,336 @@
 			</div>
 		</div>
 	</div>
+	
+		<!-- 测量数据修改对话框 -->
+	<div class="modal fade" id="editmeterdataEditDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新建测量数据信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new_customer_form">
+						<input type="hidden" id="edit_cust_id" name="cust_id"/>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">项目名称</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="项目名称" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">高度</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="高度" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">厚度</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="厚度" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">宽度</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="宽度" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">实际面积</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="实际面积" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">备注</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="备注" name="cust_linkman">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 订单报价新建对话框 -->
+	<div class="modal fade" id="orderNewDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新建订单报价信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new_customer_form">
+						<input type="hidden" id="edit_cust_id" name="cust_id"/>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">项目名称</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="项目名称" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">面积</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="面积" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">门扇</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="门扇" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">玻璃</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="玻璃" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">开关</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="开关" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">其他</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="其他" name="cust_linkman">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">金额</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="金额" name="cust_linkman">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 订单报价修改对话框 -->
+	<div class="modal fade" id="orderEditDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">修改订单报价信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new_customer_form">
+						<input type="hidden" id="edit_cust_id" name="cust_id"/>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">项目名称</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="项目名称" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">面积</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="面积" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">门扇</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="门扇" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">玻璃</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="玻璃" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">开关</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="开关" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">其他</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="其他" name="cust_linkman">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">金额</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="金额" name="cust_linkman">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 货款结算新建对话框 -->
+	<div class="modal fade" id="accountNewDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新建货款结算信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new_customer_form">
+						<input type="hidden" id="edit_cust_id" name="cust_id"/>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">总金额</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="总金额" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">线上支付</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="线上支付" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">线下支付</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="线下支付" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">未结算</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="未结算" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">金额</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="金额" name="cust_linkman">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 货款结算修改对话框 -->
+	<div class="modal fade" id="accountEditDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">修改货款结算信息</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new_customer_form">
+						<input type="hidden" id="edit_cust_id" name="cust_id"/>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">总金额</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="总金额" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">线上支付</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="线上支付" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">线下支付</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="线下支付" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_customerName" class="col-sm-2 control-label">未结算</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_customerName" placeholder="未结算" name="cust_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">金额</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_linkMan" placeholder="金额" name="cust_linkman">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 公共留言 -->
+	<div class="modal fade" id="publicMessageNewDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">我的留言</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new_customer_form">
+						<div class="form-group">
+							<label for="edit_linkMan" class="col-sm-2 control-label">留言</label>
+							<div class="col-sm-10">
+								<textarea name="mytextarea" style="height:120px;width:400px"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
@@ -574,6 +870,29 @@
 	<script src="<%=basePath%>js/sb-admin-2.js"></script>
 	
 	<script type="text/javascript">
+	<%-- function meterDataList() {
+		alert($("#custID").text());
+		var id=$("#custID").text();
+		$.ajax({
+			type:"get",
+			url:"<%=basePath%>customer/meterData.action",
+			data:{"id":id},
+			success:function(data) {
+				
+				$("#edit_cust_id").val(data.cust_id);
+				$("#edit_customerName").val(data.cust_name);
+				$("#edit_customerFrom").val(data.cust_source)
+				$("#edit_custIndustry").val(data.cust_industry)
+				$("#edit_custLevel").val(data.cust_level)
+				$("#edit_linkMan").val(data.cust_linkman);//联系人
+				$("#edit_phone").val(data.cust_phone);  //移动电话
+				$("#edit_dataString").val(data.cust_dataString);   //进店日期
+				$("#edit_wangwangID").val(data.cust_wangwangID);
+				$("#edit_address").val(data.cust_address);
+			}
+		});
+	} --%>
+	
 		function editCustomer(id) {
 			$.ajax({
 				type:"get",

@@ -39,4 +39,6 @@ public interface CustomerService {
 	
 	public void updateCustomerStatuCancel(Long id);
 	public SysUser selectUserLogin(String telephone,String password);
+	
+	public void updateUserpassword(Long id,String password);
 }

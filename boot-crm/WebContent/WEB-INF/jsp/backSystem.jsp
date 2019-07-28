@@ -113,7 +113,7 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >内部账号列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >内部账号列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#userNewDialog" onclick="newCustomer()">新建</button></div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -152,7 +152,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >设置地区列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >设置地区列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#regionNewDialog" onclick="newCustomer()">新建</button></div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -168,7 +168,7 @@
 										<td>${row.user_password}</td>
 										<td>
 											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
-											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+											<%-- <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a> --%>
 										</td>
 									</tr>
 								</c:forEach>
@@ -188,7 +188,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >设置状态列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >设置状态列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#statuNewDialog" onclick="newCustomer()">新建</button></div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -204,7 +204,7 @@
 										<td>${row.user_password}</td>
 										<td>
 											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
-											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+											<%-- <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a> --%>
 										</td>
 									</tr>
 								</c:forEach>
@@ -223,7 +223,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >内部级别列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >内部级别列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal" data-target="#levelNewDialog" onclick="newCustomer()">新建</button></div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -239,7 +239,7 @@
 										<td>${row.user_password}</td>
 										<td>
 											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
-											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
+											<%-- <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a> --%>
 										</td>
 									</tr>
 								</c:forEach>
@@ -258,12 +258,12 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >操作记录列表<button style="float:right" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#customerNewDialog" onclick="newCustomer()">新建</button></div>
+						<div class="panel-heading" style="overflow: auto;vertical-align:middle;font-size: 20px" >操作记录列表</div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>级别</th>
+									<th>时间</th>
+									<th>用户名</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -295,8 +295,8 @@
 		<!-- /#page-wrapper -->
 
 	</div>
-	<%-- <!-- 客户修改对话框 -->
-	<div class="modal fade" id="customerEditDialog" tabindex="-1" role="dialog"
+	<!-- 新建用户信息对话框 -->
+	<div class="modal fade" id="userNewDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -304,89 +304,135 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">修改客户信息</h4>
+					<h4 class="modal-title" id="myModalLabel">新建用户信息</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" id="edit_customer_form">
 						<input type="hidden" id="edit_cust_id" name="cust_id"/>
 						<div class="form-group">
-							<label for="edit_customerName" class="col-sm-2 control-label">客户名称</label>
+							<label for="edit_customerName" class="col-sm-2 control-label">用户名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_customerName" placeholder="客户名称" name="cust_name">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="用户名称" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">客户地区</label> 
+							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">用户电话</label> 
 							<div class="col-sm-10">
-								<select	class="form-control" id="edit_customerFrom" placeholder="客户地区" name="cust_source">
-									<option value="">--请选择--</option>
-									<c:forEach items="${fromType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
+								<input type="text" class="form-control" id="edit_customerName" placeholder="用户名称" name="cust_name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">所属状态</label>
+							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">密码设置</label>
 							<div class="col-sm-10"> 
-								<select	class="form-control" id="edit_custIndustry"  name="cust_industry">
-									<option value="">--请选择--</option>
-									<c:forEach items="${industryType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">客户级别</label>
-							<div class="col-sm-10">
-								<select	class="form-control" id="edit_custLevel" name="cust_level">
-									<option value="">--请选择--</option>
-									<c:forEach items="${levelType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_linkMan" class="col-sm-2 control-label">联系人</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_linkMan" placeholder="联系人" name="cust_linkman">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_phone" class="col-sm-2 control-label">移动电话</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_phone" placeholder="移动电话" name="cust_phone">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_dataString" class="col-sm-2 control-label">进店日期</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_dataString" placeholder="进店日期" name="cust_dataString">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_wangwangID" class="col-sm-2 control-label">旺旺ID</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_wangwangID" placeholder="旺旺ID" name="cust_wangwangID">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_address" class="col-sm-2 control-label">联系地址</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_address" placeholder="联系地址" name="cust_address">
+								<input type="text" class="form-control" id="edit_phone" placeholder="密码设置" name="cust_phone">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存修改</button>
+					<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存</button>
 				</div>
 			</div>
 		</div>
-	</div> --%>
+	</div>
+	
+	<!-- 新建地区列表对话框 -->
+	<div class="modal fade" id="regionNewDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新建地区列表</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="edit_customer_form">
+						
+						<div class="form-group">
+							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">地区名称</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="地区名称" name="cust_name">
+							</div>
+						</div>
+						
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- 新建状态列表对话框 -->
+	<div class="modal fade" id="statuNewDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新建状态</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="edit_customer_form">
+						
+						<div class="form-group">
+							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">状态名称</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="地区名称" name="cust_name">
+							</div>
+						</div>
+						
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 新建级别列表对话框 -->
+	<div class="modal fade" id="levelNewDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新建级别</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="edit_customer_form">
+						
+						<div class="form-group">
+							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">级别名称</label> 
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_customerName" placeholder="级别名称" name="cust_name">
+							</div>
+						</div>
+						
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
 	<%-- <!-- 客户新建对话框 -->
 	<div class="modal fade" id="customerNewDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -565,7 +611,7 @@
 		}
 		
 		function editUser(id){
-			alert("功能待开发！");
+			alert("功能待开发，考虑是否有必要！");
 			<%-- $.post("<%=basePath%>customer/updateCustomerStatuCancel.action",{"id":id},function(data){
 				alert("客户删除更新成功！");
 			}); --%>

@@ -186,6 +186,18 @@ public class CustomerServiceImpl implements CustomerService {
 		customerDao.updateCustomerStatu(id);
 	}
 	
+	public void updateUserpassword(Long id,String password) {
+		SysUser sysUser=new SysUser();
+		if(StringUtils.isNotBlank(password)){
+			sysUser.setUser_password(password);
+		}
+		sysUser.setUser_id(id);
+		
+		
+		
+		customerDao.updateUserpassword(sysUser);
+	}
+	
 	@Override
 	public void updateCustomerStatuCancel(Long id) {
 		customerDao.updateCustomerStatuCancel(id);

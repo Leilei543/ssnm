@@ -144,7 +144,7 @@ public class CustomerController {
 		
 		// 客户详情列表
 		@RequestMapping(value = "/customer/detailsHtml")
-		public String detailsHtml(Long id,String custName, String custSource,String custIndustry, String custLevel, Model model) {
+		public String detailsHtml(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="8")Integer rows,Long id,String custName, String custSource,String custIndustry, String custLevel, Model model) {
 			Page<Customer> customers = customerService.getCustomerList(id,custName, custSource, custIndustry,custLevel);
 			List<Customer> customer = customers.getRows();
 			for(Customer cust:customer){
@@ -158,8 +158,8 @@ public class CustomerController {
 				}
 			}
 			model.addAttribute("page", customers);
-			/*Page<MeterData> meterDetail = customerService.findMeterList(page, rows,id);
-			model.addAttribute("pageD", meterDetail);*/
+			Page<MeterData> meterDetail = customerService.findMeterList(page, rows,id);
+			model.addAttribute("pageD", meterDetail);
 			//客户来源
 			List<BaseDict> fromType = systemService.findBaseDictListByType(FROM_TYPE);
 			//客户所属行业
@@ -280,5 +280,21 @@ public class CustomerController {
 			return "redirect:/customer/list.action";
 		}
 	}
+	
+		//用户修改密码
+		@RequestMapping(value = "/customer/updateUserPassword")
+		public String updateUserPassword(HttpServletRequest request ,String password) {
+			HttpSession  session = request.getSession();
+			SysUser sysUser =(SysUser) session.getAttribute("SysUser");
+			Long id = sysUser.getUser_id();
+			String f="1";
+			try{
+				customerService.updateUserpassword(id,password);
+				return "f";
+			}catch(Exception e){
+				f="0";
+				return "f";
+			}
+		}
 
 }
