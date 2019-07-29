@@ -52,7 +52,7 @@
 
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
+			style="margin-bottom: 0; position:fixed; width:100%">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse">
@@ -60,7 +60,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">AimiGi客户管理系统G1.0</a>
+			<a class="navbar-brand">AimiGi客户管理系统G1.0</a>
 		</div>
 		<!-- /.navbar-header -->
 
@@ -106,7 +106,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">客户管理</h1>
+					<h1 class="page-header" style="margin-top:70px">客户管理</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>

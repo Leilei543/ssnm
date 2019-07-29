@@ -283,6 +283,7 @@ public class CustomerController {
 	
 		//用户修改密码
 		@RequestMapping(value = "/customer/updateUserPassword")
+		@ResponseBody
 		public String updateUserPassword(HttpServletRequest request ,String password) {
 			HttpSession  session = request.getSession();
 			SysUser sysUser =(SysUser) session.getAttribute("SysUser");
@@ -290,10 +291,10 @@ public class CustomerController {
 			String f="1";
 			try{
 				customerService.updateUserpassword(id,password);
-				return "f";
+				return f;
 			}catch(Exception e){
 				f="0";
-				return "f";
+				return f;
 			}
 		}
 

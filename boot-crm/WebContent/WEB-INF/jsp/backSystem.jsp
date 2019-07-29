@@ -50,9 +50,8 @@
 
 	<div id="wrapper">
 
-		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
+			style="margin-bottom: 0; position:fixed; width:100%">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse">
@@ -60,28 +59,30 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">AimiGi客户管理系统G1.0</a>
+			<a class="navbar-brand">AimiGi客户管理系统G1.0</a>
 		</div>
 		<!-- /.navbar-header -->
 
 		<ul class="nav navbar-top-links navbar-right">
+			<li>欢迎您：${SysUser.user_name }</li>
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#"> <i class="fa fa-envelope fa-fw"></i>
 					<i class="fa fa-caret-down"></i>
 					</a>
 			</li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
+			<li class="dropdown">
+				<a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
 				<ul class="dropdown-menu dropdown-user">
-					<li><a href="#"><i class="fa fa-user fa-fw"></i> 用户设置</a></li>
-					<li><a href="#"><i class="fa fa-gear fa-fw"></i>修改密码</a></li>
+					<!-- <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户设置</a></li> -->
+					<li><a data-toggle="modal" data-target="#UserEditDialog"><i class="fa fa-gear fa-fw"></i>修改密码</a></li>
 					<li class="divider"></li>
-					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+					<li><a href="${pageContext.request.contextPath }/loginOut.action"><i class="fa fa-sign-out fa-fw"></i>
 							退出登录</a></li>
-				</ul> <!-- /.dropdown-user --></li>
-			<!-- /.dropdown -->
+				</ul>
+			</li>
 		</ul>
 		<!-- /.navbar-top-links -->
 
@@ -104,7 +105,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">后台管理</h1>
+					<h1 class="page-header" style="margin-top:70px">后台管理</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -431,10 +432,8 @@
 		</div>
 	</div>
 	
-	
-	
-	<%-- <!-- 客户新建对话框 -->
-	<div class="modal fade" id="customerNewDialog" tabindex="-1" role="dialog"
+	<!-- 修改密码对话框 -->
+	<div class="modal fade" id="UserEditDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -442,89 +441,35 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">新建客户信息</h4>
+					<h4 class="modal-title" id="myModalLabel">修改密码</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" id="new_customer_form">
+					<form class="form-horizontal" id="edit_userPassword_form">
 						<input type="hidden" id="edit_cust_id" name="cust_id"/>
 						<div class="form-group">
-							<label for="edit_customerName" class="col-sm-2 control-label">客户名称</label>
+							<label for="edit_customerName" class="col-sm-2 control-label">新密码</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_customerName" placeholder="客户名称" name="cust_name">
+								<input type="password" class="form-control" id="edit_password" placeholder="新密码" name="user_password" required>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">客户地区</label> 
+							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">确认密码</label> 
 							<div class="col-sm-10">
-								<select	class="form-control" id="edit_customerFrom" placeholder="客户地区" name="cust_source">
-									<option value="">--请选择--</option>
-									<c:forEach items="${fromType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
+								<input type="password" class="form-control" id="queren_password" placeholder="确认密码" name="user_quepassword" required>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">所属状态</label>
-							<div class="col-sm-10"> 
-								<select	class="form-control" id="edit_custIndustry"  name="cust_industry">
-									<option value="">--请选择--</option>
-									<c:forEach items="${industryType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">客户级别</label>
-							<div class="col-sm-10">
-								<select	class="form-control" id="edit_custLevel" name="cust_level">
-									<option value="">--请选择--</option>
-									<c:forEach items="${levelType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_linkMan" class="col-sm-2 control-label">联系人</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_linkMan" placeholder="联系人" name="cust_linkman">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_phone" class="col-sm-2 control-label">移动电话</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_phone" placeholder="移动电话" name="cust_phone">
-							</div>
-						</div>
-						<!-- <div class="form-group">
-							<label for="edit_mobile" class="col-sm-2 control-label">进店日期</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_mobile" placeholder="进店日期" name="cust_mobile">
-							</div>
-						</div> -->
-						<div class="form-group">
-							<label for="edit_wangwangID" class="col-sm-2 control-label">旺旺ID</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_wangwangID" placeholder="旺旺ID" name="cust_wangwangID">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_address" class="col-sm-2 control-label">联系地址</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_address" placeholder="联系地址" name="cust_address">
-							</div>
-						</div>
+						
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="insertCustomer()">保存</button>
+					<button type="button" class="btn btn-primary" onclick="updateUserPassword()">确定</button>
 				</div>
 			</div>
 		</div>
-	</div> --%>
+	</div>
+	
+	
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
@@ -563,7 +508,31 @@
 				}
 			});
 		}
-		
+		function updateUserPassword(){
+			//	 var a = $("#edit_userPassword_form").form("validate");
+				
+					 var v1=$("#edit_password").val();
+					 var v2=$("#queren_password").val();
+					 if(v1==v2){
+						 $.post("<%=basePath%>customer/updateUserPassword.action",{"password":v1},function(data){
+								if(data=='1'){
+									alert('修改密码成功！');
+									
+								}else{
+									alert('修改密码失败！');
+								}
+								window.location.reload();
+							});
+						 //$("#edit_userPassword_form").window("close");
+					 }else{
+						 alert('两次密码不一致，修改密码失败！');
+						 window.location.reload();
+						 //$("#edit_userPassword_form").window("close");
+					 }
+				
+				 
+				 
+				}
 		function newCustomer() {
 			$.post("<%=basePath%>customer/newCustomer.action",$("#new_customer_form").serialize(),function(data){
 				
