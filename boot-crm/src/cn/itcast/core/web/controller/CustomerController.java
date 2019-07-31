@@ -2,7 +2,9 @@ package cn.itcast.core.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.BaseDict;
@@ -133,12 +137,14 @@ public class CustomerController {
 		}
 		
 		@RequestMapping(value = "/customer/meterDataDetails")
-		public String meterDataDetails(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="5")Integer rows,Long id, Model model) {
+		public ModelAndView meterDataDetails(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="5")Integer rows,Long id, Model model) {
 
 			Page<MeterData> meterDetail = customerService.findMeterList(page, rows,id);
 			
-			model.addAttribute("pageD", meterDetail);
-			return "details";
+		    Map map = new HashMap<>();
+		    model.addAttribute("page", meterDetail);
+		    map.put("meterDetail", meterDetail);
+		    return new ModelAndView(new MappingJackson2JsonView(),map);
 		}
 		
 		

@@ -46,7 +46,8 @@
 
 </head>
 
-<body>
+<body onload="queryDetails()">
+
 
 	<div id="wrapper">
 
@@ -185,7 +186,7 @@
 									<th>操作</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tbody_meterData">
 								<c:forEach items="${pageD.rows}" var="row">
 									<tr>
 										<td>${row.cust_id}</td>
@@ -202,10 +203,10 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<%-- <div class="col-md-12 text-right">
+						 <div class="col-md-12 text-right" id="nav_meterData">
 							<!-- 测量数据查询 -->
-							<itcast:page url="${pageContext.request.contextPath }/customer/meterData.action?id=${row.cust_id}" />
-						</div> --%>
+							<%--<itcast:page url="${pageContext.request.contextPath }/customer/meterData.action?id=${row.cust_id}" />--%>
+						</div> 
 					</div>
 				</div>
 				<!-- /.col-lg-12 -->
@@ -1033,6 +1034,97 @@
 			$.post("<%=basePath%>customer/updateCustomerStatuCancel.action",{"id":id},function(data){
 				window.location.reload();
 			});
+		}
+		
+		//第一次进入查询所有
+		function queryDetails() {
+			queryMeterData(1, 5);//查询测量数据，第一页，每页5行
+			
+		}
+		
+		
+		//查询测量数据
+		//page：第几页
+		//rows：每页行数
+		function queryMeterData(page,rows) {
+			
+			$("#tbody_meterData").empty();
+			var id = $("#custID").text();
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>/customer/meterDataDetails.action",
+				data:{"id":id,
+					  "page":page,
+					  "rows":rows
+				},
+				success:function(data) {
+					
+					//生成表格
+					var list = data.meterDetail.rows;
+				 	for(var i = 0;i<list.length;i++){
+				 		var meterData = list[i];
+				 		var str = "<tr>"  
+		 			           + "<td>"+list[i].cust_id+"</td>"
+		 					   + "<td>"+list[i].data_menuname+"</td>"
+		 					   + "<td>"+list[i].data_width+"</td>"
+		 					   + "<td>"+list[i].data_higth+"</td>"
+		 					   + "<td>"+list[i].data_land+"</td>"
+		 					   + "<td>"+list[i].data_area+"</td>"
+		 					   + "<td>"+list[i].data_remark+"</td>"
+		 					   + "<td><a href='#' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#customerEditDialog' onclick='editCustomer("+list[i].cust_id+"})'>修改</a></td>"
+		 					   + "<tr>";  
+				 		$("#tbody_meterData").append(str);
+				  	}
+				 	
+				 	//分页功能
+				 	writeNavigationTag("nav_meterData", data.meterDetail, "queryMeterData");
+				}
+			});
+		}
+		
+		//生成分页公共方法
+		//navID：分页所在DIV的ID
+		//pageObj：封装数据的page对象
+		//clickFunction：翻页按钮功能
+		function writeNavigationTag(navID, pageObj, clickFunction) {
+			$("#"+navID).empty();
+			
+			//显示页码数量
+			var number = 5;
+			
+			//计算总页数
+        	var pageCount = parseInt(pageObj.total / pageObj.size);
+        	if (pageObj.total % pageObj.size > 0) {
+        		pageCount++;
+        	}
+        	var str="<nav><ul class='pagination'>";
+        
+            //显示“上一页”按钮
+        	if (pageObj.page > 1) {
+        		var prePage = pageObj.page - 1;
+                str +="<li><a href='javascript:"+clickFunction+"("+prePage+","+pageObj.size+")'>上一页</a></li>";
+            } else {
+            	 str +="<li class='disabled'><a href='javascript:void(0)'>上一页</a></li>";
+            }
+            //显示当前页码的前2页码和后两页码 
+            //若1 则 1 2 3 4 5, 若2 则 1 2 3 4 5, 若3 则1 2 3 4 5,
+            //若4 则 2 3 4 5 6 ,若10  则 8 9 10 11 12
+            var indexPage = (pageObj.page - 2 > 0)? pageObj.page - 2 : 1;  
+            for(var i=1; i <= number && indexPage <= pageCount; indexPage++, i++) {
+                if(indexPage == pageObj.page) {
+                	str += "<li class='active'><a href='javascript:void(0)' >"+indexPage+"<span class=\"sr-only\">(current)</span></a></li>";
+                    continue;
+                }
+                str += "<li><a href='javascript:"+clickFunction+"("+indexPage+","+pageObj.size+")'>"+ indexPage +"</a></li>";
+            }
+            //显示“下一页”按钮
+            if (pageObj.page < pageCount) {
+            	var nextPage = pageObj.page+1;
+            	str += "<li><a href='javascript:"+clickFunction+"("+nextPage+","+pageObj.size+")'>下一页</a></li>";
+            } else {
+            	str += "<li class='disabled'><a href='javascript:void(0)'>下一页</a></li></nav>";
+            }
+        	$("#nav_meterData").append(str);
 		}
 		
 	</script>
