@@ -133,7 +133,7 @@
 										<td>${row.user_password}</td>
 										<td>${row.user_phone}</td>
 										<td>
-											<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a>
+											<%-- <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editUser(${row.user_id})">修改</a> --%>
 											<a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="deleteUser(${row.user_id})">删除</a>
 										</td>
 									</tr>
@@ -308,31 +308,31 @@
 					<h4 class="modal-title" id="myModalLabel">新建用户信息</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" id="edit_customer_form">
+					<form class="form-horizontal" id="new_user_form">
 						<input type="hidden" id="edit_cust_id" name="cust_id"/>
 						<div class="form-group">
 							<label for="edit_customerName" class="col-sm-2 control-label">用户名称</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_customerName" placeholder="用户名称" name="cust_name">
+								<input type="text" class="form-control" id="edit_userName" placeholder="用户名称" name="user_name">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">用户电话</label> 
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_customerName" placeholder="用户名称" name="cust_name">
+								<input type="text" class="form-control" id="edit_phone" placeholder="用户电话" name="user_phone">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">密码设置</label>
 							<div class="col-sm-10"> 
-								<input type="text" class="form-control" id="edit_phone" placeholder="密码设置" name="cust_phone">
+								<input type="text" class="form-control" id="edit_password" placeholder="密码设置" name="user_password">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="updateCustomer()">保存</button>
+					<button type="button" class="btn btn-primary" onclick="newUserList()">保存</button>
 				</div>
 			</div>
 		</div>
@@ -533,6 +533,17 @@
 				 
 				 
 				}
+		
+		
+		
+		function newUserList() {
+			$.post("<%=basePath%>customer/newUserList.action",$("#new_user_form").serialize(),function(data){
+				alert("用户更新成功");
+				window.location.reload();
+			});
+		}
+		
+		
 		function newCustomer() {
 			$.post("<%=basePath%>customer/newCustomer.action",$("#new_customer_form").serialize(),function(data){
 				
@@ -552,14 +563,14 @@
 			});
 		}
 		
-		//function deleteCustomer(id) {
-		//	if(confirm('确实要删除该客户吗?')) {
-		//		$.post("<//%=basePath%>customer/delete.action",{"id":id},function(data){
-		//			alert("客户删除更新成功！");
-		//			window.location.reload();
-			//	});
-			//}
-		//}
+		function deleteUser(id) {
+			if(confirm('确实要删除该客户吗?')) {
+				$.post("<//%=basePath%>customer/deleteUser.action",{"id":id},function(data){
+						alert("客户删除更新成功！");
+						window.location.reload();
+				});
+			}
+		}
 		function detailsCustomer(id) {
 			$.ajax({
 				type:"get",

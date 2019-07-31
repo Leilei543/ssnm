@@ -247,6 +247,18 @@ public class CustomerController {
 		return "OK";
 	}
 	
+	@RequestMapping("/customer/newUserList")
+	@ResponseBody
+	public String newUserList(SysUser sysUser) {
+		Date d =new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		sysUser.setUser_createtime(d);
+		customerService.insertUser(sysUser);
+		return "OK";
+	}
+	
+	
+	
 	@RequestMapping("/customer/delete")
 	@ResponseBody
 	public String customerDelete(Long id) {

@@ -29,7 +29,9 @@ public interface CustomerDao {
 	void updateCustomerStatu(Long id);
 	void insertCustomer(Customer customer);
 	
-	void updateUserpassword(SysUser sysUser);;
+	void insertUser(SysUser sysUser);
+	
+	void updateUserpassword(SysUser sysUser);
 	
 	Customer getCustomerList(Long id);
 	void updateCustomerStatuCancel(Long id);

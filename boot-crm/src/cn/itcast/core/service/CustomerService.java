@@ -33,6 +33,8 @@ public interface CustomerService {
 
 	public void insertCustomer(Customer customer);
 	
+	public void insertUser(SysUser sysUser);
+	
 	public void deleteCustomer(Long id);
 	
 	public void updateCustomerStatu(Long id);

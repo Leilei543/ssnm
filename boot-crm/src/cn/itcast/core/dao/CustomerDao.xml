@@ -282,5 +282,10 @@
 		UPDATE sys_user  SET user_password=#{user_password} WHERE user_id=#{user_id};
 	</update>
 	
+	<insert id="insertUser" parameterType="sysUser">
+		insert into sys_user(user_name,user_password,user_phone,user_createtime)
+		values(#{user_name},#{user_password},#{user_phone},#{user_createtime})
+	
+	</insert>
 	
 </mapper>

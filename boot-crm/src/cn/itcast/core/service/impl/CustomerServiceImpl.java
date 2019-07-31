@@ -224,6 +224,12 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 	@Override
+	public void insertUser(SysUser sysUser) {
+		customerDao.insertUser(sysUser);
+		
+	}
+	
+	@Override
 	public Page<MeterData> findMeterList( Integer page, Integer rows,Long id) {
 		MeterData meterData = new MeterData();
 		
