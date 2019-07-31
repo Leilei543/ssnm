@@ -287,5 +287,9 @@
 		values(#{user_name},#{user_password},#{user_phone},#{user_createtime})
 	
 	</insert>
+	<insert id="insetMessage" parameterType="cn.itcast.core.bean.Message">
+		insert into message(user_name,wor_remark,wor_createtime)
+		values(#{user_name},#{wor_remark},#{wor_createtime})
+	</insert>
 	
 </mapper>

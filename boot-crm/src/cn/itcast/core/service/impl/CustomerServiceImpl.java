@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.Message;
 import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 import cn.itcast.core.dao.BaseDictDao;
@@ -226,7 +227,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void insertUser(SysUser sysUser) {
 		customerDao.insertUser(sysUser);
-		
+	}
+	
+	@Override
+	public void insetMessage(Message message) {
+		customerDao.insetMessage(message);
 	}
 	
 	@Override

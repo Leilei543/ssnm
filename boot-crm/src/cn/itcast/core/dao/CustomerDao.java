@@ -3,6 +3,7 @@ package cn.itcast.core.dao;
 import java.util.List;
 
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.Message;
 import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 
@@ -30,6 +31,8 @@ public interface CustomerDao {
 	void insertCustomer(Customer customer);
 	
 	void insertUser(SysUser sysUser);
+	
+	void insetMessage(Message message);
 	
 	void updateUserpassword(SysUser sysUser);
 	

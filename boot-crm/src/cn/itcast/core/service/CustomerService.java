@@ -2,6 +2,7 @@ package cn.itcast.core.service;
 
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.Message;
 import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 
@@ -34,6 +35,8 @@ public interface CustomerService {
 	public void insertCustomer(Customer customer);
 	
 	public void insertUser(SysUser sysUser);
+	
+	public void insetMessage(Message message);
 	
 	public void deleteCustomer(Long id);
 	

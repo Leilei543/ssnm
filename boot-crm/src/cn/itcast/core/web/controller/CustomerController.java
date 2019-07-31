@@ -23,6 +23,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import cn.itcast.common.utils.Page;
 import cn.itcast.core.bean.BaseDict;
 import cn.itcast.core.bean.Customer;
+import cn.itcast.core.bean.Message;
 import cn.itcast.core.bean.MeterData;
 import cn.itcast.core.bean.SysUser;
 import cn.itcast.core.service.CustomerService;
@@ -113,7 +114,7 @@ public class CustomerController {
 	
 	  // 客户后台设置列表
 		@RequestMapping(value = "/customer/backSystem")
-		public String backSystem(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="10")Integer rows, Model model) {
+		public String backSystem(@RequestParam(defaultValue="1")Integer page, @RequestParam(defaultValue="5")Integer rows, Model model) {
 
 			Page<SysUser> sysUsers = customerService.findUserList(page, rows);
 			
@@ -255,11 +256,20 @@ public class CustomerController {
 	
 	@RequestMapping("/customer/newUserList")
 	@ResponseBody
-	public String newUserList(SysUser sysUser) {
+	public String newUserList(HttpServletRequest request,SysUser sysUser) {
 		Date d =new Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		HttpSession  session = request.getSession();
+		SysUser sysUserw =(SysUser) session.getAttribute("SysUser");
+		
 		sysUser.setUser_createtime(d);
 		customerService.insertUser(sysUser);
+		Message message=new Message();
+		message.setUser_name(sysUserw.getUser_name());
+		message.setWor_createtime(d);
+		message.setWor_remark("新建了一个用户");
+		customerService.insetMessage(message);
+		
 		return "OK";
 	}
 	
